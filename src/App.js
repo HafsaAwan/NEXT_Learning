@@ -1,25 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
 import './App.css';
+import { Switch, Route} from 'react-router-dom';
+import { Modal } from 'reactstrap';
+import LoginForm from './components/LoginForm';
+import SignUpForm from './components/SignUpForm';
+import NavBarDisplay from './components/NavBarDisplay';
+import HomePage from './pages/HomePage';
 
 function App() {
+
+  /** 
+   * The default boolean for loggedIn state would be
+   * determined by whether JWT exists in localStorage
+  */
+  const [loggedIn, setLoggedIn] = useState(
+  localStorage.getItem('jwt') !== null
+  )
+
+  //for modal states
+  const [modal, setModal] = useState(false);
+  const toggleModal = () => setModal(!modal);
+
+  //for switching between login and signup form
+  const [isLoginForm, setLoginForm] = useState(true);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NavBarDisplay toggleModal={toggleModal} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
+      <Switch>
+      
+        <Route exact path="/" component={HomePage}/>
+      
+      </Switch>
+      
+      <Modal isOpen={modal} toggle={toggleModal} >
+      
+        {
+          (isLoginForm) ? 
+          <LoginForm setLoginForm={setLoginForm} toggleModal={toggleModal} setLoggedIn={setLoggedIn}/> : 
+          <SignUpForm setLoginForm={setLoginForm} toggleModal={toggleModal}/>
+        }
+     
+      </Modal>
+    
+    
+    </>
   );
 }
 
