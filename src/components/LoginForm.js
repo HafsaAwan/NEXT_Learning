@@ -82,7 +82,30 @@ const LoginForm = ({setLoginForm, toggleModal, setLoggedIn}) => {
                     <Label for="password">Password</Label>
                     <Input type="password" name="password" value={password} onChange={handleInput} />
                 </FormGroup>
+                <hr/>
+                <FormGroup tag="fieldset">
+                    <legend>Login As:</legend>
+                    <FormGroup check>
+                        <Label check>
+                            <Input type="radio" name="radio1" />{' '}
+                            Student
+                        </Label>
+                    </FormGroup>
+                    <FormGroup check>
+                        <Label check>
+                            <Input type="radio" name="radio1" />{' '}
+                            Teacher
+                        </Label>
+                    </FormGroup>
+                    <FormGroup check>
+                        <Label check>
+                            <Input type="radio" name="radio1" />{' '}
+                            Guardian
+                        </Label>
+                    </FormGroup>
+                </FormGroup>
             </Form>
+            <hr/>
             <p>New member? <span onClick={()=> setLoginForm(false)} style={{color:"blue",cursor:"pointer"}}>Sign up Here!</span></p>
         </ModalBody>
         <ModalFooter>

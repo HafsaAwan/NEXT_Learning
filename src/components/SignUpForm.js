@@ -13,6 +13,7 @@ const SignUpForm = ({setLoginForm, toggleModal}) => {
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [role, setRole] = useState("");
 
     const checkUsername = newUsername => {
         // this should only trigger after you stop typing for 500ms
@@ -50,6 +51,9 @@ const SignUpForm = ({setLoginForm, toggleModal}) => {
         }
         if(e.target.name === "password"){
             setPassword(e.target.value)
+        }
+        if(e.target.name ="radio1"){
+            setRole(e.target.value)
         }
     };
     
@@ -94,7 +98,8 @@ const SignUpForm = ({setLoginForm, toggleModal}) => {
             data: {
             username: username,
             email: email,
-            password: password
+            password: password,
+            role: role
             }
             })
             .then(response => {
@@ -104,6 +109,7 @@ const SignUpForm = ({setLoginForm, toggleModal}) => {
                 setPassword("")
                 setUsername("")
                 setEmail("")
+                setRole("")
                 history.push(`/users/${user.id}`)
 
                 toast.success("Signed Up successfully!", {
@@ -154,6 +160,28 @@ const SignUpForm = ({setLoginForm, toggleModal}) => {
                         value={password}
                         onChange={handleInput} 
                     />
+                </FormGroup>
+                <hr/>
+                <FormGroup tag="fieldset">
+                    <legend>Sign Up As:</legend>
+                    <FormGroup check>
+                        <Label check>
+                            <Input type="radio" name="radio1" value={role} onChange={handleInput}/>
+                            Student
+                        </Label>
+                    </FormGroup>
+                    <FormGroup check>
+                        <Label check>
+                            <Input type="radio" name="radio1" value={role} onChange={handleInput}/>
+                            Teacher
+                        </Label>
+                    </FormGroup>
+                    <FormGroup check>
+                        <Label check>
+                            <Input type="radio" name="radio1" value={role} onChange={handleInput}/>
+                            Guardian
+                        </Label>
+                    </FormGroup>
                 </FormGroup>
             </Form>
             <p>Already a member? <span onClick={()=> setLoginForm(true)} style={{color:"blue",cursor:"pointer"}}>Log in here</span></p>

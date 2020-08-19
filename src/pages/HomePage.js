@@ -6,7 +6,7 @@ const HomePage = ({users}) => {
 
     return (
       
-       <h1>HomePage</h1>
+       <h1>App HomePage</h1>
       
     );
 }

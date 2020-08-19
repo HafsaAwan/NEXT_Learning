@@ -6,6 +6,7 @@ import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
 import NavBarDisplay from './components/NavBarDisplay';
 import HomePage from './pages/HomePage';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
       <Switch>
       
         <Route exact path="/" component={HomePage}/>
+        <Route exact path="/profile" component = {ProfilePage} />
       
       </Switch>
       
